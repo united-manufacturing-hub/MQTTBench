@@ -6,7 +6,7 @@ use rumqttc::{AsyncClient, Event, MqttOptions, Outgoing, QoS};
 use std::time::Instant;
 
 pub(crate) async fn bench() {
-    let name: String = generate_random_string(30);
+    let name: String = generate_random_string(5);
     let mut mqttoptions = MqttOptions::new(name, HOST, PORT);
     mqttoptions.set_keep_alive(5);
     mqttoptions.set_clean_session(true);
@@ -28,7 +28,7 @@ pub(crate) async fn bench() {
             client
                 .publish(
                     topic,
-                    QoS::ExactlyOnce,
+                    QoS::AtLeastOnce,
                     false,
                     format!("{{\"timestamp_ms\": {}, \"count\": {}}}", i, i).as_bytes(),
                 )
@@ -46,7 +46,7 @@ pub(crate) async fn bench() {
                 if let Outgoing::Publish(_) = &o {
                     published += 1;
                     if published % 1000 == 0 {
-                        //print_message_per_sec(published, n_messages, start);
+                        print_message_per_sec(published, n_messages, start);
                     }
                 }
             }
