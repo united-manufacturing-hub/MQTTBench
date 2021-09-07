@@ -1,0 +1,13 @@
+version: '3'
+services:
+  mosquitto:
+    image: eclipse-mosquitto
+    ports:
+      - "1883:1883"
+      - "8883:8883"
+    volumes:
+      - C:\Users\ferdi\CLionProjects\MQTTBench\mosquitto\data:/mosquitto/data
+      - C:\Users\ferdi\CLionProjects\MQTTBench\mosquitto\logs:/mosquitto/logs
+      - C:\Users\ferdi\CLionProjects\MQTTBench\mosquitto\conf:/mosquitto/config
+    restart: unless-stopped
+
