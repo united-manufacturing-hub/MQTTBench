@@ -31,7 +31,7 @@ pub(crate) async fn bench() {
                     topic,
                     QoS::AtLeastOnce,
                     false,
-                    format!("{{\"timestamp_ms\": {}, \"count\": {}}}", i, i).as_bytes(),
+                    format!("{{\"timestamp_ms\": {}, \"count\": {}, \"scrap\": 0}}", i, i).as_bytes(),
                 )
                 .await
                 .unwrap();

@@ -23,7 +23,7 @@ pub(crate) fn generate_random(amount: u64) -> Vec<(String, String)> {
     let mut rng = rand::thread_rng();
     let mut payloads = vec![];
 
-    for _ in rng.gen()..amount {
+    for _ in 0..amount {
         let rand_val = rng.gen_range(0..=24);
 
         let payload = match rand_val {

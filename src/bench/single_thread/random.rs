@@ -3,8 +3,8 @@ use crate::{print_message_per_sec, HOST, PORT};
 use log::info;
 
 use rumqttc::{AsyncClient, Event, MqttOptions, Outgoing, QoS};
-use std::thread;
-use std::time::{Duration, Instant};
+
+use std::time::Instant;
 
 pub(crate) async fn bench() {
     let name: String = generate_random_string(30);
@@ -21,9 +21,11 @@ pub(crate) async fn bench() {
         .unwrap();
 
     let n_messages: u64 = 100_000;
+    info!("Generating {} messages", n_messages);
     let random_messages = generate_random(n_messages);
+    info!("Generated {} messages", random_messages.len());
     info!(
-        "Beginning count bench, with 1 thread and {} messages",
+        "Beginning random bench, with 1 thread and {} messages",
         n_messages
     );
     let start = Instant::now();
@@ -39,8 +41,7 @@ pub(crate) async fn bench() {
                 )
                 .await
                 .unwrap();
-            //println!("Send: Prefix: {}, Message: {:#?}", message.0, message.1);
-            //thread::sleep(Duration::from_secs(1))
+            println!("Send: Prefix: {}, Message: {:#?}", message.0, message.1);
         }
     });
 

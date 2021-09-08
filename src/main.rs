@@ -19,8 +19,8 @@ async fn main() {
         .init()
         .unwrap();
 
-    single_thread::count::bench().await;
-    cool_down();
+    //single_thread::count::bench().await;
+    //cool_down();
     single_thread::random::bench().await;
 }
 
