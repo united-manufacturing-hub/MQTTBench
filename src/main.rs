@@ -5,11 +5,12 @@ use log::{info, LevelFilter};
 
 use std::thread;
 use std::time::{Duration, Instant};
+use std::str::FromStr;
 
 pub(crate) mod bench;
 pub(crate) mod generator;
-pub(crate) const HOST: &str = "172.21.9.195";
-pub(crate) const PORT: u16 = 1883;
+//pub(crate) const HOST: &str = "172.21.9.195";
+//pub(crate) const PORT: u16 = 1883;
 
 #[tokio::main(flavor = "multi_thread", worker_threads = 10)]
 async fn main() {
@@ -19,9 +20,11 @@ async fn main() {
         .init()
         .unwrap();
 
-    //single_thread::count::bench().await;
-    //cool_down();
-    single_thread::random::bench().await;
+    let host = std::env::var("HOST").unwrap();
+    let port = u16::from_str(&std::env::var("PORT").unwrap()).unwrap();
+    single_thread::count::bench(host.clone(), port).await;
+    cool_down();
+    single_thread::random::bench(host.clone(), port).await;
 }
 
 /// Waits 10 secs between tests

@@ -1,14 +1,14 @@
 use crate::generator::random::generate_random_string;
-use crate::{print_message_per_sec, HOST, PORT};
+use crate::{print_message_per_sec};
 use log::info;
 
 use rumqttc::{AsyncClient, Event, MqttOptions, Outgoing, QoS};
 use std::time::Instant;
 
 /// Sends well-formatted "count" mqtt messages
-pub(crate) async fn bench() {
+pub(crate) async fn bench(host: String, port: u16) {
     let name: String = generate_random_string(5);
-    let mut mqttoptions = MqttOptions::new(name, HOST, PORT);
+    let mut mqttoptions = MqttOptions::new(name, host, port);
     mqttoptions.set_keep_alive(5);
     mqttoptions.set_clean_session(true);
     mqttoptions.set_credentials("TESTING", "");
@@ -17,7 +17,7 @@ pub(crate) async fn bench() {
     let (client, mut eventloop) = AsyncClient::new(mqttoptions, 10);
     client.subscribe(topic, QoS::AtLeastOnce).await.unwrap();
 
-    let n_messages: u64 = 100_000;
+    let n_messages: u64 = 10_000;
     info!(
         "Beginning count bench, with 1 thread and {} messages",
         n_messages
