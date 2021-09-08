@@ -5,6 +5,7 @@ use log::info;
 use rumqttc::{AsyncClient, Event, MqttOptions, Outgoing, QoS};
 use std::time::Instant;
 
+/// Sends well-formatted "count" mqtt messages
 pub(crate) async fn bench() {
     let name: String = generate_random_string(5);
     let mut mqttoptions = MqttOptions::new(name, HOST, PORT);

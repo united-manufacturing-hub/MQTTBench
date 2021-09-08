@@ -3,8 +3,8 @@ use crate::{print_message_per_sec, HOST, PORT};
 use log::info;
 
 use rumqttc::{AsyncClient, Event, MqttOptions, Outgoing, QoS};
-use std::time::{Instant, Duration};
 use std::thread;
+use std::time::{Duration, Instant};
 
 pub(crate) async fn bench() {
     let name: String = generate_random_string(30);
