@@ -29,103 +29,103 @@ pub(crate) fn generate_random(amount: u64) -> Vec<(String, String)> {
         let payload = match rand_val {
             0 => {
                 let c = Count::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             1 => {
                 let c = ScrapCount::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             2 => {
                 let c = Barcode::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             3 => {
                 let c = Activity::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             4 => {
                 let c = DetectedAnomaly::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             5 => {
                 let c = AddShift::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             6 => {
                 let c = AddOrder::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             7 => {
                 let c = AddProduct::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             8 => {
                 let c = StartOrder::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             9 => {
                 let c = EndOrder::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             10 => {
                 let c = ProcessValueFloat64::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             11 => {
                 let c = ProcessValue::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             12 => {
                 let c = ProcessValueString::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             13 => {
                 let c = Recommendation::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             14 => {
                 let c = State::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             15 => {
                 let c = UniqueProduct::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             16 => {
                 let c = ScrapUniqueProduct::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             17 => {
                 let c = AddMaintenanceActivity::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             18 => {
                 let c = ProductTag::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             19 => {
                 let c = ProductTagString::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             20 => {
                 let c = AddParentToChild::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             21 => {
                 let c = ModifyState::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             22 => {
                 let c = ModifyProducedPieces::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             23 => {
                 let c = DeleteShiftById::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             24 => {
                 let c = DeleteShiftByAssetIdAndBeginTimestamp::generate_random();
-                (c.rng.gen(), serde_json::to_string(&c.1).unwrap())
+                (c.0, serde_json::to_string(&c.1).unwrap())
             }
             _ => {
                 panic!("Out of range {}", rand_val)
