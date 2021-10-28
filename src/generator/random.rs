@@ -1,10 +1,4 @@
-use crate::generator::models::{
-    Activity, AddMaintenanceActivity, AddOrder, AddParentToChild, AddProduct, AddShift, Barcode,
-    Count, DeleteShiftByAssetIdAndBeginTimestamp, DeleteShiftById, DetectedAnomaly, EndOrder,
-    ModifyProducedPieces, ModifyState, ProcessValue, ProcessValueFloat64, ProcessValueString,
-    ProductTag, ProductTagString, Recommendation, ScrapCount, ScrapUniqueProduct, StartOrder,
-    State, UniqueProduct,
-};
+use crate::generator::models::{Activity, AddMaintenanceActivity, AddOrder, AddParentToChild, AddProduct, AddShift, Barcode, Count, DeleteShiftByAssetIdAndBeginTimestamp, DeleteShiftById, DetectedAnomaly, EndOrder, ModifyProducedPieces, ModifyState, ProcessValue, ProcessValueFloat64, ProcessValueString, ProductImage, ProductImageImage, ProductTag, ProductTagString, Recommendation, ScrapCount, ScrapUniqueProduct, StartOrder, State, UniqueProduct};
 
 use rand::distributions::Alphanumeric;
 use rand::{thread_rng, Rng};
@@ -17,6 +11,14 @@ pub(crate) fn generate_random_string(length: usize) -> String {
         .map(char::from)
         .collect()
 }
+
+pub fn generate_random_image() -> (String, String) {
+    let mut c = ProductImage::generate_random();
+    c.1.image = ProductImageImage::generate_random().1;
+    let message = (c.0, serde_json::to_string(&c.1).unwrap());
+    return message;
+}
+
 
 /// Generates random payloads
 pub(crate) fn generate_random(amount: u64) -> Vec<(String, String)> {
@@ -478,6 +480,41 @@ impl GenRandom for DeleteShiftByAssetIdAndBeginTimestamp {
             "deleteShiftByAssetIdAndBeginTimestamp".to_string(),
             DeleteShiftByAssetIdAndBeginTimestamp {
                 begin_time_stamp: rng.gen(),
+            },
+        )
+    }
+}
+
+
+impl GenRandom for ProductImage {
+    fn generate_random() -> (String, Self) {
+        let mut rng = rand::thread_rng();
+        (
+            "productImage".to_string(),
+            ProductImage {
+                timestamp_ms: rng.gen(),
+                image: ProductImageImage::generate_random().1
+            },
+        )
+    }
+}
+
+impl GenRandom for ProductImageImage {
+    fn generate_random() -> (String, Self) {
+        let mut rng = rand::thread_rng();
+
+        let validb64: bool = rng.gen();
+
+        (
+            "productImage".to_string(),
+            ProductImageImage {
+                image_bytes: if validb64 {base64_easy::encode(generate_random_string(rng.gen_range(5..1024))) }else{
+                    generate_random_string(rng.gen_range(5..1024*1024))
+                },
+                image_channels:  rng.gen(),
+                image_height:  rng.gen(),
+                image_id: generate_random_string(rng.gen_range(5..64)),
+                image_width: rng.gen()
             },
         )
     }

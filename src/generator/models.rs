@@ -214,3 +214,22 @@ pub(crate) struct DeleteShiftById {
 pub(crate) struct DeleteShiftByAssetIdAndBeginTimestamp {
     pub(crate) begin_time_stamp: u32,
 }
+
+
+
+///ia/factoryinsight/1/2/productImage
+#[derive(Debug, Serialize, Deserialize)]
+pub(crate) struct ProductImage {
+    pub(crate) timestamp_ms: u32,
+    pub(crate) image: ProductImageImage
+}
+
+
+#[derive(Debug, Serialize, Deserialize)]
+pub(crate) struct ProductImageImage {
+    pub(crate) image_bytes: String,
+    pub(crate) image_channels: u32,
+    pub(crate) image_height: u32,
+    pub(crate) image_id: String,
+    pub(crate) image_width: u32,
+}
